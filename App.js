@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnboardingScreen from './pages/OnboardingScreen/OnboardingScreen';
 import SplashScreen from './components/SplashScreen';
+import LoginScreen from './pages/LoginScreen/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,10 @@ export default function App() {
         <Stack.Screen 
           name="Onboarding" 
           component={OnboardingScreen} 
+        />
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>
