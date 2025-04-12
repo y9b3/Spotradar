@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnboardingScreen from './pages/OnboardingScreen/OnboardingScreen';
+import SignUpScreen from './pages/SignUpScreen/SignUpScreen';
 import SplashScreen from './components/SplashScreen';
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +31,10 @@ export default function App() {
         <Stack.Screen 
           name="Onboarding" 
           component={OnboardingScreen} 
+        />
+        <Stack.Screen 
+          name="SignUp" 
+          component={SignUpScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>
