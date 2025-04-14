@@ -30,7 +30,10 @@ export default function OnboardingScreen({ navigation }) {
               />
               <Text style={styles.signUpText}>S'inscrire sur Spot Radar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity 
+              style={styles.loginButton}
+              onPress={() => navigation.navigate('Login')}
+            >
               <UserIcon size={20} color="white" />
               <Text style={styles.loginText}> J'ai déjà un compte !</Text>
             </TouchableOpacity>
