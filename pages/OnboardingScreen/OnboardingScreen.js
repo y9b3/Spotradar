@@ -20,10 +20,7 @@ export default function OnboardingScreen({ navigation }) {
       <View style={styles.bottomSection}>
         <SafeAreaView style={styles.bottomContainer}>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity 
-              style={styles.signUpButton}
-              onPress={() => navigation.navigate('SignUp')}
-            >
+            <TouchableOpacity style={styles.signUpButton}>
               <Image 
                 source={require('../../assets/Spotlogo.png')} 
                 style={styles.spotLogo}
