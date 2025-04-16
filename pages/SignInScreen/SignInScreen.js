@@ -1,9 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Svg, { Path } from 'react-native-svg';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Svg, { Path } from "react-native-svg";
 
-const AppleIcon = ({ size = 20, color = '#fff' }) => (
+const AppleIcon = ({ size = 20, color = "#fff" }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
     <Path
       fill={color}
@@ -36,16 +42,21 @@ const GoogleIcon = ({ size = 20 }) => (
 const SignInScreen = ({ navigation }) => (
   <View style={{ flex: 1 }}>
     <ImageBackground
-      source={require('../../assets/poker.png')}
+      source={require("../../assets/poker.png")}
       style={styles.backgroundImage}
       resizeMode="cover"
     >
       <SafeAreaView style={styles.safeArea}>
-        <TouchableOpacity style={styles.ignoreButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={styles.ignoreButton}
+          onPress={() => navigation.goBack()}
+        >
           <Text style={styles.ignoreText}>Ignorer</Text>
         </TouchableOpacity>
         <View style={styles.topTextContainer}>
-          <Text style={styles.title}>Le hasard choisira votre{"\n"}prochaine aventure...</Text>
+          <Text style={styles.title}>
+            Le hasard choisira votre{"\n"}prochaine aventure...
+          </Text>
         </View>
         <View style={styles.bottomCard}>
           <Text style={styles.signUpTitle}>S'inscrire sur Spot Radar</Text>
@@ -64,7 +75,7 @@ const SignInScreen = ({ navigation }) => (
           </View>
           <TouchableOpacity
             style={styles.emailButton}
-            onPress={() => navigation && navigation.navigate('EmailSignUp')}
+            onPress={() => navigation && navigation.navigate("EmailSignUp")}
           >
             <Text style={styles.emailButtonText}>
               Continuer avec une adresse e-mail
@@ -79,128 +90,129 @@ const SignInScreen = ({ navigation }) => (
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   safeArea: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.55)',
+    backgroundColor: "rgba(0,0,0,0.55)",
   },
   ignoreButton: {
-    position: 'absolute',
-    top: 50,
+    position: "absolute",
+    top: 70,
     right: 20,
     zIndex: 1,
   },
   ignoreText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
+    opacity: "0.6",
   },
   topTextContainer: {
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
     marginTop: 100,
     marginBottom: 20,
   },
   title: {
-    color: 'white',
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "rgba(255, 255, 255, 0.8)",
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
     lineHeight: 36,
-    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowColor: "rgba(0,0,0,0.3)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 3,
   },
   bottomCard: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     padding: 25,
     paddingTop: 30,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 10,
-    height: '55%',
+    height: "45%",
   },
   signUpTitle: {
     fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 25,
   },
   appleButton: {
-    backgroundColor: 'black',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "black",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     padding: 14,
     borderRadius: 12,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: 'black',
-    width: '100%',
+    borderColor: "black",
+    width: "100%",
     height: 56,
   },
   appleButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: "500",
     marginLeft: 10,
   },
   googleButton: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     padding: 14,
     borderRadius: 12,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: 'black',
-    width: '100%',
+    borderColor: "black",
+    width: "100%",
     height: 56,
   },
   googleButtonText: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: "500",
     marginLeft: 10,
   },
   separatorContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 10,
-    width: '100%',
+    width: "100%",
   },
   separator: {
     flex: 1,
     height: 1,
-    backgroundColor: '#E5E5E5',
+    backgroundColor: "#E5E5E5",
   },
   orText: {
     marginHorizontal: 10,
-    color: '#999',
+    color: "#999",
     fontSize: 14,
   },
   emailButton: {
     padding: 16,
     marginTop: 8,
-    width: '100%',
+    width: "100%",
   },
   emailButtonText: {
-    color: 'black',
+    color: "black",
     fontSize: 14,
-    textAlign: 'center',
-    textDecorationLine: 'underline',
+    textAlign: "center",
+    textDecorationLine: "underline",
   },
 });
 
-export default SignInScreen; 
+export default SignInScreen;
