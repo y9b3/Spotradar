@@ -1,21 +1,68 @@
-import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import React, { useEffect, useRef } from 'react';
+import { View, Animated, StyleSheet } from 'react-native';
 
 const SplashScreen = () => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+  const textFadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    // Animation de fade in pour le logo
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+
+    // Animation de fade in pour le texte (commence après le logo)
+    Animated.sequence([
+      Animated.delay(500), // Attend 500ms
+      Animated.timing(textFadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      })
+    ]).start();
+
+    // Animation de pulsation pour le logo
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(scaleAnim, {
+          toValue: 1.1,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 0.9,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, []);
+
   return (
-    <LinearGradient
-      colors={['#8A63FF', '#FFFFFF']}
-      locations={[0.44, 1]}
-      style={styles.container}
-    >
-      <Image
+    <View style={styles.container}>
+      <Animated.Image
         source={require('../assets/Spotlogo.png')}
-        style={styles.logo}
+        style={[
+          styles.logo,
+          {
+            opacity: fadeAnim,
+            transform: [{ scale: scaleAnim }],
+          },
+        ]}
         resizeMode="contain"
       />
-      <Text style={styles.text}>SpotRadar</Text>
-    </LinearGradient>
+      <Animated.Text style={[
+        styles.text,
+        {
+          opacity: textFadeAnim,
+        }
+      ]}>
+        SpotRadar
+      </Animated.Text>
+    </View>
   );
 };
 
@@ -24,17 +71,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#000000',
+    marginTop: -100,
   },
   logo: {
-    width: 150,
-    height: 150,
-    marginBottom: -15,
+    width: 400,
+    height: 400,
+    tintColor: '#FFFFFF',
+    marginBottom: -75,
   },
   text: {
-    color: '#000000',
-    fontSize: 24,
+    color: '#FFFFFF',
+    fontSize: 30,
     fontWeight: 'bold',
     marginTop: 0,
+    letterSpacing: 2,
   },
 });
 
