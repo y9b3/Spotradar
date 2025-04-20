@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
+
+// Préchargement de l'image
+const gameOverImage = require("../../assets/gameover.png");
+Image.prefetch(Image.resolveAssetSource(gameOverImage).uri);
 
 const AppleIcon = ({ size = 20, color = "#fff" }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
@@ -42,10 +47,12 @@ const GoogleIcon = ({ size = 20 }) => (
 const LoginScreen = ({ navigation }) => (
   <View style={{ flex: 1 }}>
     <ImageBackground
-      source={require("../../assets/gameover.png")}
+      source={gameOverImage}
       style={styles.backgroundImage}
       imageStyle={{ transform: [{ translateY: -220 }] }}
       resizeMode="cover"
+      loadingIndicatorSource={gameOverImage}
+      defaultSource={gameOverImage}
     >
       <View style={styles.overlay} />
       <SafeAreaView style={styles.safeArea}>
@@ -77,7 +84,7 @@ const LoginScreen = ({ navigation }) => (
           </View>
           <TouchableOpacity
             style={styles.emailButton}
-            onPress={() => navigation && navigation.navigate("EmailSignUp")}
+            onPress={() => navigation && navigation.navigate("Connexion")}
           >
             <Text style={styles.emailButtonText}>
               Continuer avec une adresse e-mail
@@ -94,6 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
+    backgroundColor: '#000', // Ajout d'une couleur de fond pendant le chargement
   },
   safeArea: {
     flex: 1,

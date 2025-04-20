@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   topTextContainer: {
     width: "100%",
     alignItems: "center",
-    marginTop: 100,
+    marginTop: 195,
     marginBottom: 20,
   },
   title: {
