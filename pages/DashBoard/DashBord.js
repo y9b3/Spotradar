@@ -1,85 +1,152 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   Image,
-  TouchableOpacity,
+  FlatList,
   Dimensions,
+  Modal,
+  Pressable,
 } from "react-native";
+import NavBar from "../../components/NavBar";
+import MaskedView from "@react-native-masked-view/masked-view";
+import { LinearGradient } from "expo-linear-gradient";
 
 const { width } = Dimensions.get("window");
 
 const DashBord = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(1);
+
+  const popularItems = [
+    { id: "1", rating: "4.5" },
+    { id: "2", rating: "4.7" },
+    { id: "3", rating: "4.8" },
+    { id: "4", rating: "4.6" },
+  ];
+
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerText}>Hey Daniel</Text>
-        <View style={styles.headerIconWrapper}>
-          <Image
-            source={require("../../assets/icon/user.png")}
-            style={styles.headerIcon}
-          />
-        </View>
+        <MaskedView
+          maskElement={<Text style={styles.gradientText}>Hey Daniel</Text>}
+        >
+          <LinearGradient
+            colors={["#ffffff", "#999999"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+          >
+            <Text style={[styles.gradientText, { opacity: 0 }]}>
+              Hey Daniel
+            </Text>
+          </LinearGradient>
+        </MaskedView>
+
+        <Image
+          source={require("../../assets/icon/Vector.png")}
+          style={styles.vectorIcon}
+        />
       </View>
 
-      {/* Contenu */}
-      <ScrollView
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
+      {/* Body */}
+      <View style={styles.body}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Populaire */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Populaire</Text>
+            <Image
+              source={require("../../assets/icon/populaire.png")}
+              style={styles.popIcon}
+            />
+          </View>
+
+          <FlatList
+            data={popularItems}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingVertical: 10 }}
+            renderItem={({ item }) => (
+              <View style={[styles.card, { marginRight: 16 }]}>
+                <View style={styles.grayBox} />
+                <View style={styles.ratingBadge}>
+                  <Text style={styles.ratingText}>{item.rating} ⭐</Text>
+                </View>
+              </View>
+            )}
+          />
+
+          {/* Récent */}
+          <View style={styles.sectionHeaderRecent}>
+            <Text style={styles.sectionTitle}>Récent</Text>
+            <Image
+              source={require("../../assets/icon/recent.png")}
+              style={styles.popIcon}
+            />
+          </View>
+          <View style={styles.card}>
+            <View style={styles.grayBox} />
+            <Pressable
+              style={styles.noteBadge}
+              onPress={() => setModalVisible(true)}
+            >
+              <Text style={styles.noteText}>Laisser une note ⭐</Text>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </View>
+
+      {/* Modal note */}
+      <Modal
+        transparent
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
       >
-        {/* Populaire */}
-        <Text style={styles.sectionTitle}>
-          Populaire <Text style={styles.iconText}>📈</Text>
-        </Text>
-        <View style={styles.card}>
-          <View style={styles.grayBox} />
-          <View style={styles.ratingBadge}>
-            <Text style={styles.ratingText}>4.5 ⭐</Text>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>
+              Merci d’avoir participé à cette activité !
+            </Text>
+            <Text style={styles.modalSubtitle}>
+              Partagez votre avis en laissant une note afin d’aider d’autre
+              utilisateurs à faire leur choix en toute confiance.
+            </Text>
+
+            <View style={styles.starsContainer}>
+              {[1, 2, 3, 4, 5].map((value) => (
+                <Pressable key={value} onPress={() => setSelectedRating(value)}>
+                  <Text
+                    style={[
+                      styles.star,
+                      selectedRating >= value && styles.starSelected,
+                    ]}
+                  >
+                    ⭐
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+            <Pressable
+              onPress={() => {
+                console.log("Note envoyée :", selectedRating);
+                setModalVisible(false);
+              }}
+              style={styles.submitButton}
+            >
+              <Text style={styles.submitButtonText}>Envoyer</Text>
+            </Pressable>
           </View>
         </View>
+      </Modal>
 
-        {/* Récent */}
-        <Text style={styles.sectionTitle}>
-          Récent <Text style={styles.iconText}>⏱️</Text>
-        </Text>
-        <View style={styles.card}>
-          <View style={styles.grayBox} />
-          <View style={styles.noteBadge}>
-            <Text style={styles.noteText}>Laisser une note ⭐</Text>
-          </View>
-        </View>
-      </ScrollView>
-
-      {/* Navigation bar */}
-      <View style={styles.navBar}>
-        <TouchableOpacity style={styles.navIconWrapperActive}>
-          <Image
-            source={require("../../assets/icon/home.png")}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navIconWrapper}>
-          <Image
-            source={require("../../assets/icon/globe.png")}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navIconWrapper}>
-          <Image
-            source={require("../../assets/icon/dice.png")}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navIconWrapper}>
-          <Image
-            source={require("../../assets/icon/user.png")}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-      </View>
+      <NavBar active="home" />
     </View>
   );
 };
@@ -87,46 +154,53 @@ const DashBord = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#000",
   },
   header: {
-    backgroundColor: "#000",
-    paddingTop: 60,
-    paddingBottom: 20,
+    paddingTop: 70,
+    paddingBottom: 10,
     paddingHorizontal: 20,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
-    position: "relative",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  headerText: {
-    color: "#fff",
-    fontSize: 28,
-    fontWeight: "bold",
+  vectorIcon: {
+    width: 60,
+    height: 40,
+    resizeMode: "contain",
   },
-  headerIconWrapper: {
-    position: "absolute",
-    top: 60,
-    right: 30,
-    backgroundColor: "#000",
-    borderRadius: 30,
-  },
-  headerIcon: {
-    width: 30,
-    height: 30,
-    tintColor: "#fff",
+  body: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    marginTop: -10,
+    paddingTop: 5,
+    paddingHorizontal: 20,
   },
   scrollContainer: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingBottom: 120,
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 25,
     marginBottom: 10,
   },
-  iconText: {
-    fontSize: 18,
+  sectionHeaderRecent: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  sectionTitle: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginRight: 8,
+  },
+  popIcon: {
+    width: 30,
+    height: 25,
+    resizeMode: "contain",
   },
   card: {
     backgroundColor: "#E5E5E5",
@@ -134,8 +208,9 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 30,
     position: "relative",
-    height: 250,
+    height: 230,
     justifyContent: "space-between",
+    width: 300,
   },
   grayBox: {
     height: 170,
@@ -168,44 +243,63 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000",
   },
-  navBar: {
-    position: "absolute",
-    bottom: 20,
-    alignSelf: "center",
-    flexDirection: "row",
-    backgroundColor: "#000",
-    borderRadius: 50,
-    padding: 6,
-    paddingHorizontal: 8,
+  gradientText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
   },
-  navIconWrapperActive: {
-    width: 68,
-    height: 68,
-    borderRadius: 34,
-    backgroundColor: "#8B5CF6",
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 4,
   },
-  navIconWrapper: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+  modalContainer: {
     backgroundColor: "#fff",
-    justifyContent: "center",
+    borderRadius: 20,
+    padding: 24,
+    marginHorizontal: 20,
     alignItems: "center",
-    marginRight: 4,
-    marginTop: 4,
-    marginBottom: 2,
   },
-  navIconLast: {
-    marginRight: 0,
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
   },
-  navIcon: {
-    width: 26,
-    height: 26,
-    resizeMode: "contain",
-    tintColor: "#000",
+  modalSubtitle: {
+    fontSize: 14,
+    textAlign: "center",
+    color: "#333",
+    marginBottom: 20,
+  },
+  star: {
+    fontSize: 30,
+    opacity: 0.3,
+    marginHorizontal: 5,
+  },
+  starSelected: {
+    opacity: 1,
+  },
+  starsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "#000",
+    borderRadius: 30,
+    paddingHorizontal: 24,
+    paddingVertical: 10,
+  },
+  submitButton: {
+    marginTop: 20,
+    backgroundColor: "#8B5CF6",
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    borderRadius: 30,
+  },
+  submitButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });
 
