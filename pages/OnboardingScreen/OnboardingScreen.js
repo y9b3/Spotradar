@@ -34,7 +34,7 @@ export default function OnboardingScreen({ navigation }) {
               onPress={() => navigation.navigate("SignInScreen")}
             >
               <Image
-                source={require("../../assets/Spotlogo.png")}
+                source={require("../../assets/Spotlogo_sans.png")}
                 style={styles.spotLogo}
               />
               <Text style={styles.signUpText}>S'inscrire sur Spot Radar</Text>
