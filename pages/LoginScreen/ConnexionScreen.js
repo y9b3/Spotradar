@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,12 +6,12 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ConnexionScreen = ({ navigation }) => {
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -48,8 +48,12 @@ const ConnexionScreen = ({ navigation }) => {
             style={styles.eyeButton}
             onPress={() => setShowPassword(!showPassword)}
           >
-            <Image 
-              source={showPassword ? require('../../assets/oeil-ouvert.png') : require('../../assets/oeil-ferme.png')}
+            <Image
+              source={
+                showPassword
+                  ? require("../../assets/oeil-ouvert.png")
+                  : require("../../assets/oeil-ferme.png")
+              }
               style={styles.eyeIcon}
             />
           </TouchableOpacity>
@@ -58,9 +62,10 @@ const ConnexionScreen = ({ navigation }) => {
         <TouchableOpacity
           style={[
             styles.connectButton,
-            (!identifier || !password) && styles.connectButtonDisabled
+            (!identifier || !password) && styles.connectButtonDisabled,
           ]}
           disabled={!identifier || !password}
+          onPress={() => navigation.navigate("DashBord")}
         >
           <Text style={styles.connectButtonText}>Se connecter</Text>
         </TouchableOpacity>
@@ -76,31 +81,31 @@ const ConnexionScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: "#000",
     padding: 0,
   },
   backButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 50,
     left: 20,
     zIndex: 1,
   },
   backButtonText: {
     fontSize: 24,
-    color: '#fff',
+    color: "#fff",
   },
   title: {
-    position: 'absolute',
+    position: "absolute",
     top: 50,
     left: 0,
     right: 0,
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
   },
   form: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     padding: 20,
@@ -110,60 +115,60 @@ const styles = StyleSheet.create({
     marginBottom: -50,
   },
   input: {
-    width: '100%',
+    width: "100%",
     height: 50,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E5E5',
+    borderBottomColor: "#E5E5E5",
     marginBottom: 20,
     fontSize: 16,
-    color: '#000',
+    color: "#000",
   },
   passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    position: 'relative',
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    position: "relative",
   },
   passwordInput: {
     flex: 1,
   },
   eyeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 10,
-    height: '100%',
-    justifyContent: 'center',
+    height: "100%",
+    justifyContent: "center",
   },
   eyeIcon: {
     width: 24,
     height: 24,
-    tintColor: '#666',
+    tintColor: "#666",
   },
   connectButton: {
-    width: '100%',
+    width: "100%",
     height: 50,
-    backgroundColor: '#666',
+    backgroundColor: "#666",
     borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 30,
   },
   connectButtonDisabled: {
     opacity: 0.5,
   },
   connectButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   forgotPasswordButton: {
     marginTop: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   forgotPasswordText: {
-    color: '#8B5CF6',
+    color: "#8B5CF6",
     fontSize: 14,
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
 });
 
-export default ConnexionScreen; 
+export default ConnexionScreen;
