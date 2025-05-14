@@ -2,57 +2,67 @@ import React from "react";
 import {
   View,
   Text,
-  ImageBackground,
   TouchableOpacity,
   StyleSheet,
   Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import UserIcon from "../../components/UserIcon";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function OnboardingScreen({ navigation }) {
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.topSection}>
-        <ImageBackground
-          source={require("../../assets/bording.png")}
-          style={styles.background}
-        >
-          <View style={styles.overlay} />
-          <SafeAreaView style={styles.topContainer}>
-            <Text style={styles.title}>
-              Découvrez des activités{"\n"}près de chez vous...
-            </Text>
-          </SafeAreaView>
-        </ImageBackground>
-      </View>
-      <View style={styles.bottomSection}>
-        <SafeAreaView style={styles.bottomContainer}>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.signUpButton}
-              onPress={() => navigation.navigate("SignInScreen")}
-            >
+      <LinearGradient
+        colors={["#3D5AFE", "#FF4E8E"]}
+        style={styles.background}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      >
+        <SafeAreaView style={styles.container}>
+          <View style={styles.contentContainer}>
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>
+                DÉCOUVRE{"\n"}
+                LES MEILLEURS SPOT{"\n"}
+                AUTOUR DE TOI.
+              </Text>
+            </View>
+            
+            <View style={styles.circleImageContainer}>
               <Image
-                source={require("../../assets/Spotlogo_sans.png")}
-                style={styles.spotLogo}
+                source={require("../../assets/poker.png")}
+                style={styles.circleImage}
               />
-              <Text style={styles.signUpText}>S'inscrire sur Spot Radar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={() => navigation.navigate("Login")}
-            >
-              <UserIcon size={20} color="white" />
-              <Text style={styles.loginText}> J'ai déjà un compte !</Text>
-            </TouchableOpacity>
-            <Text style={styles.footerText}>
-              À propos de Spot Radar ·
-              <Text style={styles.link}> Notre plateforme</Text>
-            </Text>
+            </View>
+            
+            <View style={styles.buttonContainerWrapper}>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={styles.signUpButton}
+                  onPress={() => navigation.navigate("SignInScreen")}
+                >
+                  <Image
+                    source={require("../../assets/icon/addcont.png")}
+                    style={styles.buttonIcon}
+                  />
+                  <Text style={styles.signUpText}>S'inscrire sur Spot Radar</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={styles.loginButton}
+                  onPress={() => navigation.navigate("Login")}
+                >
+                  <Image
+                    source={require("../../assets/icon/connect.png")}
+                    style={styles.buttonIcon}
+                  />
+                  <Text style={styles.loginText}>Se connecter à Spot Radar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </SafeAreaView>
-      </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -60,101 +70,96 @@ export default function OnboardingScreen({ navigation }) {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#000",
-  },
-  topSection: {
-    flex: 1,
-  },
-  bottomSection: {
-    backgroundColor: "white",
-    borderTopLeftRadius: 45,
-    borderTopRightRadius: 45,
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 25,
-    marginTop: -25,
-    marginHorizontal: 0,
-    justifyContent: "center",
   },
   background: {
     flex: 1,
     width: "100%",
+    height: "100%",
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.55)",
-  },
-  topContainer: {
+  container: {
     flex: 1,
   },
-  bottomContainer: {
-    width: "100%",
+  contentContainer: {
+    flex: 1,
+    position: "relative",
+  },
+  textContainer: {
+    position: "absolute",
+    top: 140,
+    left: 20,
+    right: 150,
+    zIndex: 2,
   },
   title: {
     color: "white",
     fontSize: 24,
-    fontWeight: "800",
-    textAlign: "center",
-    marginTop: "50%",
-    paddingHorizontal: 20,
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 3,
-    letterSpacing: 0.5,
-    opacity: "0.8",
+    fontWeight: "bold",
+    lineHeight: 30,
+    width:"200%",
+  },
+  circleImageContainer: {
+    position: "absolute",
+    top: 90,
+    right: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 160,
+    overflow: "hidden",
+    backgroundColor: "transparent",
+  },
+  circleImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+  buttonContainerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: "center",
   },
   buttonContainer: {
-    width: "100%",
-    paddingTop: 0,
-    paddingHorizontal: 5,
+    width: "90%",
+    backgroundColor: "white",
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    paddingTop: 35,
+    paddingBottom: 80,
   },
   signUpButton: {
-    backgroundColor: "white",
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: "center",
-    marginBottom: 12,
-    flexDirection: "row",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "#000",
-  },
-  signUpText: {
-    color: "black",
-    fontSize: 16,
-    fontWeight: "600",
-    marginLeft: 6,
-  },
-  loginButton: {
     backgroundColor: "black",
-    padding: 16,
-    borderRadius: 14,
-    alignItems: "center",
-    marginBottom: 25,
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "center",
-  },
-  loginText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "600",
-    marginLeft: 8,
-  },
-  footerText: {
-    color: "#666",
-    textAlign: "center",
-    fontSize: 12,
+    padding: 16,
+    borderRadius: 12,
     marginBottom: 20,
   },
-  link: {
-    textDecorationLine: "underline",
+  loginButton: {
+    backgroundColor: "white",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "black",
   },
-  spotLogo: {
-    width: 42,
-    height: 42,
-    resizeMode: "contain",
-    marginLeft: -4,
-    marginVertical: -14,
+  buttonIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+    tintColor: "white",
+  },
+  signUpText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "white",
+  },
+  loginText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "black",
   },
 });
