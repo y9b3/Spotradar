@@ -59,15 +59,13 @@ const ConnexionScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          style={[
-            styles.connectButton,
-            (!identifier || !password) && styles.connectButtonDisabled,
-          ]}
-          disabled={!identifier || !password}
-          onPress={() => navigation.navigate("DashBord")}
+        <TouchableOpacity 
+          style={[styles.loginButton, password.length > 0 && styles.loginButtonActive]}
+          onPress={() => navigation.replace('Feed')}
         >
-          <Text style={styles.connectButtonText}>Se connecter</Text>
+          <Text style={[styles.loginButtonText, password.length > 0 && styles.loginButtonTextActive]}>
+            Se connecter
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.forgotPasswordButton}>
@@ -143,31 +141,33 @@ const styles = StyleSheet.create({
     height: 24,
     tintColor: "#666",
   },
-  connectButton: {
-    width: "100%",
+  loginButton: {
+    width: '100%',
     height: 50,
-    backgroundColor: "#666",
+    backgroundColor: '#666',
     borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
   },
-  connectButtonDisabled: {
-    opacity: 0.5,
+  loginButtonActive: {
+    backgroundColor: '#000',
   },
-  connectButtonText: {
-    color: "#fff",
+  loginButtonText: {
+    color: '#999',
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: 'bold',
+  },
+  loginButtonTextActive: {
+    color: '#fff',
   },
   forgotPasswordButton: {
-    marginTop: 20,
-    alignItems: "center",
+    marginTop: 16,
+    alignSelf: 'center',
   },
   forgotPasswordText: {
-    color: "#8B5CF6",
+    color: '#666',
     fontSize: 14,
-    textDecorationLine: "underline",
   },
 });
 

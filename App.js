@@ -7,7 +7,7 @@ import LoginScreen from "./pages/LoginScreen/LoginScreen";
 import SignInScreen from "./pages/SignInScreen/SignInScreen";
 import EmailSignUp from "./pages/SignInScreen/EmailSignUp";
 import ConnexionScreen from "./pages/LoginScreen/ConnexionScreen";
-import DashBord from "./pages/DashBoard/DashBord";
+import FeedScreen from "./pages/DashBoard/FeedScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,14 +27,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Onboarding"
+        initialRouteName="Login"
         screenOptions={{
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="DashBord" component={DashBord} />
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Feed" component={FeedScreen} />
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="SignInScreen" component={SignInScreen} />
         <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
         <Stack.Screen name="Connexion" component={ConnexionScreen} />
