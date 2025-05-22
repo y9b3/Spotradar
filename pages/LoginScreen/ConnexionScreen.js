@@ -6,169 +6,178 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
 
-const ConnexionScreen = ({ navigation }) => {
+export default function ConnexionScreen({ navigation }) {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleLogin = () => {
+    if (identifier.trim() === "" || password.trim() === "") {
+      console.log("Veuillez remplir tous les champs.");
+      return;
+    }
+    navigation.navigate("Feed");
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.backButtonText}>←</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Se connecter</Text>
-
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder="Nom d'utilisateur ou adresse email"
-          value={identifier}
-          onChangeText={setIdentifier}
-          autoCapitalize="none"
-          placeholderTextColor="#999"
-        />
-
-        <View style={styles.passwordContainer}>
-          <TextInput
-            style={[styles.input, styles.passwordInput]}
-            placeholder="Mot de passe"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={!showPassword}
-            placeholderTextColor="#999"
-          />
-          <TouchableOpacity
-            style={styles.eyeButton}
-            onPress={() => setShowPassword(!showPassword)}
-          >
-            <Image
-              source={
-                showPassword
-                  ? require("../../assets/oeil-ouvert.png")
-                  : require("../../assets/oeil-ferme.png")
-              }
-              style={styles.eyeIcon}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity 
-          style={[styles.loginButton, password.length > 0 && styles.loginButtonActive]}
-          onPress={() => navigation.replace('Feed')}
+    <LinearGradient
+      colors={["#3D5AFE", "#FF4E8E"]}
+      style={styles.background}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0, y: 1 }}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-          <Text style={[styles.loginButtonText, password.length > 0 && styles.loginButtonTextActive]}>
-            Se connecter
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.forgotPasswordButton}>
-          <Text style={styles.forgotPasswordText}>Mot de passe oublié ?</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+          <Text style={styles.header}>Se connecter</Text>
+          <View style={styles.formContainer}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Text style={styles.backButtonText}>←</Text>
+            </TouchableOpacity>
+            <TextInput
+              style={styles.input}
+              placeholder="Nom d'utilisateur"
+              value={identifier}
+              onChangeText={setIdentifier}
+              autoCapitalize="none"
+              placeholderTextColor="#B0B0B0"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Mot de passe"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword}
+              placeholderTextColor="#B0B0B0"
+            />
+            <TouchableOpacity
+              style={styles.eyeButton}
+              onPress={() => setShowPassword(!showPassword)}
+            >
+              <Image
+                source={
+                  showPassword
+                    ? require("../../assets/oeil-ouvert.png")
+                    : require("../../assets/oeil-ferme.png")
+                }
+                style={styles.eyeIcon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.connexionButton} onPress={handleLogin}>
+              <Text style={styles.connexionButtonText}>CONNEXION</Text>
+              <Image
+                source={require("../../assets/icon/log.png")}
+                style={styles.connexionIcon}
+              />
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </LinearGradient>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    backgroundColor: "#000",
-    padding: 0,
+    width: "100%",
+    height: "100%",
+  },
+  header: {
+    color: "white",
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 40,
+    marginBottom: 10,
+    letterSpacing: 1,
+  },
+  formContainer: {
+    backgroundColor: "white",
+    borderRadius: 40,
+    marginHorizontal: 16,
+    marginTop: 30,
+    padding: 28,
+    paddingBottom: 60,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.10,
+    shadowRadius: 24,
+    elevation: 8,
+    minHeight: 350,
+  },
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+    fontSize: 18,
+    color: "#222",
+    marginBottom: 36,
+    paddingVertical: 12,
+    paddingHorizontal: 0,
+  },
+  connexionButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-end",
+    backgroundColor: "#D9D9D9",
+    borderRadius: 30,
+    paddingVertical: 7,
+    paddingHorizontal: 14,
+    position: "absolute",
+    right: 18,
+    bottom: 18,
+    opacity: 0.8,
+    zIndex: 2,
+  },
+  connexionButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+    marginRight: 8,
+    letterSpacing: 1,
+  },
+  connexionIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain",
+    tintColor: "white",
   },
   backButton: {
     position: "absolute",
-    top: 50,
-    left: 20,
-    zIndex: 1,
+    left: 18,
+    bottom: 18,
+    backgroundColor: "transparent",
+    zIndex: 2,
   },
   backButtonText: {
-    fontSize: 24,
-    color: "#fff",
-  },
-  title: {
-    position: "absolute",
-    top: 50,
-    left: 0,
-    right: 0,
-    fontSize: 24,
+    fontSize: 32,
+    color: "#888",
     fontWeight: "bold",
-    color: "#fff",
-    textAlign: "center",
-  },
-  form: {
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    padding: 20,
-    paddingTop: 30,
-    flex: 1,
-    marginTop: 60,
-    marginBottom: -50,
-  },
-  input: {
-    width: "100%",
-    height: 50,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
-    marginBottom: 20,
-    fontSize: 16,
-    color: "#000",
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    position: "relative",
-  },
-  passwordInput: {
-    flex: 1,
   },
   eyeButton: {
     position: "absolute",
-    right: 10,
-    height: "100%",
+    right: 18,
+    top: 110,
+    height: 40,
+    width: 40,
     justifyContent: "center",
+    alignItems: "center",
+    zIndex: 2,
   },
   eyeIcon: {
     width: 24,
     height: 24,
-    tintColor: "#666",
-  },
-  loginButton: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#666',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  loginButtonActive: {
-    backgroundColor: '#000',
-  },
-  loginButtonText: {
-    color: '#999',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  loginButtonTextActive: {
-    color: '#fff',
-  },
-  forgotPasswordButton: {
-    marginTop: 16,
-    alignSelf: 'center',
-  },
-  forgotPasswordText: {
-    color: '#666',
-    fontSize: 14,
+    tintColor: "#999",
   },
 });
-
-export default ConnexionScreen;
