@@ -7,6 +7,7 @@ import {
   Image,
   Animated,
   Dimensions,
+  Image as RNImage,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
@@ -242,6 +243,10 @@ export default function OnboardingScreen({ navigation }) {
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
       >
+        <RNImage
+          source={require("../../assets/background/fond.png")}
+          style={styles.bgImage}
+        />
         <SafeAreaView style={styles.container}>
           <View style={styles.contentContainer}>
             <View style={styles.textContainer}>
@@ -415,5 +420,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     color: "black",
+  },
+  bgImage: {
+    ...StyleSheet.absoluteFillObject,
+    width: "100%",
+    height: "100%",
+    opacity: 0.3,
+    zIndex: 0,
   },
 });
