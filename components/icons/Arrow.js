@@ -1,18 +1,16 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-const Arrow = ({ size = 16, color = '#FFFFFF' }) => {
+export default function Arrow({ size = 24, color = '#000' }) {
   return (
-    <Svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <Path
-        d="M8 3L14 8L8 13M2 8H14"
+        d="M8 5l8 7-8 7"
         stroke={color}
-        strokeWidth="2"
+        strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
     </Svg>
   );
-};
-
-export default Arrow; 
+} 
