@@ -320,35 +320,35 @@ export default function SignInScreen({ navigation }) {
               ]}
             >
               <View style={styles.buttonContainer}>
-                <TouchableOpacity
+        <TouchableOpacity
                   style={styles.appleButton}
                   onPress={() => {}}
-                >
-                  <AppleIcon />
+        >
+            <AppleIcon />
                   <Text style={styles.appleButtonText}>S'inscrire avec Apple</Text>
-                </TouchableOpacity>
+          </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.googleButton}
                   onPress={() => {}}
                 >
-                  <GoogleIcon />
+            <GoogleIcon />
                   <Text style={styles.googleButtonText}>S'inscrire avec Google</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.emailButton}
-                  onPress={() => navigation && navigation.navigate("EmailSignUp")}
-                >
-                  <Text style={styles.emailButtonText}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.emailButton}
+            onPress={() => navigation && navigation.navigate("EmailSignUp")}
+          >
+            <Text style={styles.emailButtonText}>
                     S'inscrire avec une adresse e-mail
-                  </Text>
-                </TouchableOpacity>
+            </Text>
+          </TouchableOpacity>
               </View>
             </Animated.View>
-          </View>
-        </SafeAreaView>
+        </View>
+      </SafeAreaView>
       </LinearGradient>
-    </View>
-  );
+  </View>
+);
 }
 
 const styles = StyleSheet.create({

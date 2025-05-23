@@ -320,35 +320,35 @@ export default function LoginScreen({ navigation }) {
               ]}
             >
               <View style={styles.buttonContainer}>
-                <TouchableOpacity
+        <TouchableOpacity
                   style={styles.appleButton}
                   onPress={() => {}}
-                >
-                  <AppleIcon />
-                  <Text style={styles.appleButtonText}>Continuer avec Apple</Text>
-                </TouchableOpacity>
+        >
+            <AppleIcon />
+            <Text style={styles.appleButtonText}>Continuer avec Apple</Text>
+          </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.googleButton}
                   onPress={() => {}}
                 >
-                  <GoogleIcon />
-                  <Text style={styles.googleButtonText}>Continuer avec Google</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.emailButton}
-                  onPress={() => navigation && navigation.navigate("Connexion")}
-                >
-                  <Text style={styles.emailButtonText}>
-                    Continuer avec une adresse e-mail
-                  </Text>
-                </TouchableOpacity>
+            <GoogleIcon />
+            <Text style={styles.googleButtonText}>Continuer avec Google</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.emailButton}
+            onPress={() => navigation && navigation.navigate("Connexion")}
+          >
+            <Text style={styles.emailButtonText}>
+              Continuer avec une adresse e-mail
+            </Text>
+          </TouchableOpacity>
               </View>
             </Animated.View>
-          </View>
-        </SafeAreaView>
+        </View>
+      </SafeAreaView>
       </LinearGradient>
-    </View>
-  );
+  </View>
+);
 }
 
 const styles = StyleSheet.create({

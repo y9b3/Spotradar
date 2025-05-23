@@ -2,21 +2,29 @@
 import React from "react";
 import {
   View,
+  Text,
   TouchableOpacity,
   Image,
   StyleSheet,
   Dimensions,
 } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 
 const NavBar = ({ active = "home" }) => {
+  const navigation = useNavigation();
+
   const icons = [
-    { name: "home", source: require("../assets/icon/home.png") },
-    { name: "globe", source: require("../assets/icon/globe.png") },
-    { name: "dice", source: require("../assets/icon/dice.png") },
-    { name: "user", source: require("../assets/icon/user.png") },
+    { name: "home", source: require("../assets/icon/home.png"), screen: "Feed" },
+    { name: "globe", source: require("../assets/icon/globe.png"), screen: "Map" },
+    { name: "dice", source: require("../assets/icon/dice.png"), screen: "Feed" },
+    { name: "user", source: require("../assets/icon/user.png"), screen: "Feed" },
   ];
+
+  const handleNavigation = (screen) => {
+    navigation.navigate(screen);
+  };
 
   return (
     <View style={styles.navBar}>
@@ -28,6 +36,7 @@ const NavBar = ({ active = "home" }) => {
             item.name === active && styles.navIconWrapperActive,
             index === icons.length - 1 && { marginRight: 0 },
           ]}
+          onPress={() => handleNavigation(item.screen)}
         >
           <Image source={item.source} style={styles.navIcon} />
         </TouchableOpacity>

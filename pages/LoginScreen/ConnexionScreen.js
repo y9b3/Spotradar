@@ -39,51 +39,51 @@ export default function ConnexionScreen({ navigation }) {
         >
           <Text style={styles.header}>Se connecter</Text>
           <View style={styles.formContainer}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => navigation.goBack()}
-            >
-              <Text style={styles.backButtonText}>←</Text>
-            </TouchableOpacity>
-            <TextInput
-              style={styles.input}
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.backButtonText}>←</Text>
+      </TouchableOpacity>
+        <TextInput
+          style={styles.input}
               placeholder="Nom d'utilisateur"
-              value={identifier}
-              onChangeText={setIdentifier}
-              autoCapitalize="none"
+          value={identifier}
+          onChangeText={setIdentifier}
+          autoCapitalize="none"
               placeholderTextColor="#B0B0B0"
-            />
-            <TextInput
+        />
+          <TextInput
               style={styles.input}
-              placeholder="Mot de passe"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
+            placeholder="Mot de passe"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
               placeholderTextColor="#B0B0B0"
+          />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <Image
+              source={
+                showPassword
+                  ? require("../../assets/oeil-ouvert.png")
+                  : require("../../assets/oeil-ferme.png")
+              }
+              style={styles.eyeIcon}
             />
-            <TouchableOpacity
-              style={styles.eyeButton}
-              onPress={() => setShowPassword(!showPassword)}
-            >
-              <Image
-                source={
-                  showPassword
-                    ? require("../../assets/oeil-ouvert.png")
-                    : require("../../assets/oeil-ferme.png")
-                }
-                style={styles.eyeIcon}
-              />
-            </TouchableOpacity>
+          </TouchableOpacity>
             <TouchableOpacity style={styles.connexionButton} onPress={handleLogin}>
               <Text style={styles.connexionButtonText}>CONNEXION</Text>
               <Image
                 source={require("../../assets/icon/log.png")}
                 style={styles.connexionIcon}
               />
-            </TouchableOpacity>
-          </View>
+        </TouchableOpacity>
+      </View>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+    </SafeAreaView>
     </LinearGradient>
   );
 }
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
-    marginTop: 40,
+    marginTop: 80,
     marginBottom: 10,
     letterSpacing: 1,
   },
