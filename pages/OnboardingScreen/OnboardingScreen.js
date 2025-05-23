@@ -239,10 +239,10 @@ export default function OnboardingScreen({ navigation }) {
     <View style={styles.mainContainer}>
       <LinearGradient
         colors={["#3D5AFE", "#FF4E8E"]}
-        style={styles.background}
+          style={styles.background}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
-      >
+        >
         <RNImage
           source={require("../../assets/background/fond.png")}
           style={styles.bgImage}
@@ -275,7 +275,7 @@ export default function OnboardingScreen({ navigation }) {
                   )}
                 </>
               )}
-            </View>
+      </View>
             {/* Texte animé synchronisé avec l'image */}
             {isFirstRender ? (
               <Animated.View style={styles.textContainer}>
@@ -307,27 +307,27 @@ export default function OnboardingScreen({ navigation }) {
                 }
               ]}
             >
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  style={styles.signUpButton}
-                  onPress={() => navigation.navigate("SignInScreen")}
-                >
-                  <Image
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.signUpButton}
+              onPress={() => navigation.navigate("SignInScreen")}
+            >
+              <Image
                     source={require("../../assets/icon/addcont.png")}
                     style={styles.buttonIcon}
-                  />
-                  <Text style={styles.signUpText}>S'inscrire sur Spot Radar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.loginButton}
-                  onPress={() => navigation.navigate("Login")}
-                >
+              />
+              <Text style={styles.signUpText}>S'inscrire sur Spot Radar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => navigation.navigate("Login")}
+            >
                   <Image
                     source={require("../../assets/icon/connect.png")}
                     style={styles.buttonIcon}
                   />
                   <Text style={styles.loginText}>Se connecter à Spot Radar</Text>
-                </TouchableOpacity>
+            </TouchableOpacity>
               </View>
             </Animated.View>
           </View>
